@@ -11,12 +11,12 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public void save(User user) {
-        store.put(user.getId(), user);
+        store.put(user.getStudentId(), user);
     }
 
     @Override
-    public User findById(Long id) {
-        return store.get(id);
+    public User findByStudentId(Long studentId) {
+        return store.get(studentId);
     }
 
     @Override

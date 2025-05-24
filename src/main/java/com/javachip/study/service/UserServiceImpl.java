@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(Long id) {
-        return Optional.ofNullable(repo.findById(id))
+        return Optional.ofNullable(repo.findByStudentId(id))
             .map(mapper::toDto)
             .orElseThrow(() -> new UserNotFoundException(id));
     }
