@@ -7,6 +7,6 @@ import com.javachip.study.dto.UserDto;
 //직접 구현체 클래스를 만들거나 MapStruct를 활용 가능
 
 public interface UserMapper {
-    User toEntity(UserDto dto, Long id);
+    User toEntity(UserDto dto);
     UserDto toDto(User entity);
 }

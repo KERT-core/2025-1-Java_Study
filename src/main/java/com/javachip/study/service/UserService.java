@@ -6,7 +6,7 @@ import java.util.List;
 //User 관련 비즈니스 로직들을 구현하기 위한 인터페이스
 
 public interface UserService {
-    Long register(UserDto dto);
-    UserDto getUser(Long id);
+    Long signup(UserDto dto);
+    UserDto getUser(Long studentId);
     List<UserDto> getAllUsers();
 }

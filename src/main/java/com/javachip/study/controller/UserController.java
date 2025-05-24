@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping
     public ApiResponse<Long> create(@RequestBody UserDto dto) {
-        return ApiResponse.success(service.register(dto));
+        return ApiResponse.success(service.signup(dto));
     }
 
     @GetMapping("/{id}")
