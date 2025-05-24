@@ -1,6 +1,6 @@
 package com.javachip.study.service;
 
-import com.javachip.study.domain.UserEntity;
+import com.javachip.study.domain.User;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.repository.UserRepository;
 import com.javachip.study.mapper.UserMapper;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long register(UserDto dto) {
         Long newId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        UserEntity user = mapper.toEntity(dto, newId);
+        User user = mapper.toEntity(dto, newId);
         repo.save(user);
         return newId;
     }
