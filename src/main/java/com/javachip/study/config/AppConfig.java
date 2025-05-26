@@ -1,6 +1,7 @@
 package com.javachip.study.config;
 
 import com.javachip.study.controller.UserController;
+import com.javachip.study.controller.PostController;
 import com.javachip.study.mapper.*;
 import com.javachip.study.repository.*;
 import com.javachip.study.service.*;
@@ -32,5 +33,29 @@ public class AppConfig {
     @Bean
     public UserMapper userMapper() {
         return new UserMapperImpl();
+    }
+
+    @Bean
+    public PostRepository postRepository() {
+        return new InMemoryPostRepository();
+    }
+
+    @Bean
+    public PostMapper postMapper() {
+        return new PostMapperImpl();
+    }
+
+    @Bean
+    public PostService postService(
+            PostRepository postRepository,
+            UserRepository userRepository,
+            PostMapper postMapper
+    ) {
+        return new PostServiceImpl(postRepository, userRepository, postMapper);
+    }
+
+    @Bean
+    public PostController postController(PostService postService) {
+        return new PostController(postService);
     }
 }
