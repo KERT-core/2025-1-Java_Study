@@ -17,7 +17,7 @@ public class CommentMapperImpl implements CommentMapper {
         return new CommentEntity(
                 null,
                 dto.content(),
-                user.getStudentId(),
+                user,
                 post,
                 parent,
                 LocalDateTime.now()
@@ -27,7 +27,7 @@ public class CommentMapperImpl implements CommentMapper {
     public CommentDto toDto(CommentEntity entity) {
         return new CommentDto(
                 entity.getId(),
-                entity.getUserId(),
+                entity.getUser().getStudentId(),
                 entity.getPostEntity().getId(),
                 entity.getParent().getId(),
                 entity.getContent(),
