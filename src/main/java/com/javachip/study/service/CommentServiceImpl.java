@@ -46,8 +46,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> getAll() {
-        List<CommentEntity> commentEntities = commentRepo.findAll();
+    public List<CommentDto> getAllByPostId(Long postId) {
+        List<CommentEntity> commentEntities = commentRepo.findAll().stream()
+                .filter(comment -> comment.getPostEntity().getId().equals(postId))
+                .toList();
         return commentEntities.stream()
                 .map(mapper::toDto)
                 .toList();
