@@ -1,6 +1,7 @@
 package com.javachip.study.controller;
 
 import com.javachip.study.dto.CommentDto;
+import com.javachip.study.response.ApiResponse;
 import com.javachip.study.service.CommentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,20 +18,23 @@ public class CommentController {
     }
 
     @PostMapping
-    public CommentDto createComment(@PathVariable Long postId, @RequestBody CommentDto dto) {
-        return commentService.create(dto);
+    public ApiResponse<CommentDto> createComment(@PathVariable Long postId, @RequestBody CommentDto dto) {
+        CommentDto result = commentService.create(dto);
+        return ApiResponse.success(result);
     }
+
     @GetMapping
-    public List<CommentDto> listComments(@PathVariable Long postId) {
-        return commentService.getAll();
+    public ApiResponse<List<CommentDto>> listComments(@PathVariable Long postId) {
+        List<CommentDto> result = commentService.getAllByPostId(postId);
+        return ApiResponse.success(result);
     }
     @GetMapping("/{id}")
-    public CommentDto getCommentById(@PathVariable Long postId, @PathVariable Long id) {
-        return commentService.getById(id);
+    public ApiResponse<CommentDto> getCommentById(@PathVariable Long postId, @PathVariable Long id) {
+        return ApiResponse.success(commentService.getById(id));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long postId, @PathVariable Long id) {
         commentService.delete(id);
     }
 }
