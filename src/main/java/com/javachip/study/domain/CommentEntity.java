@@ -1,32 +1,34 @@
 package com.javachip.study.domain;
 
+import org.apache.catalina.User;
+
 import java.time.LocalDateTime;
 
 public class CommentEntity {
 
     private final Long id;
     private final String content;
-    private final Long userId;
+    private final UserEntity user;
     private final LocalDateTime createdAt;
     private final PostEntity post;
     private final CommentEntity parent;
     public CommentEntity(
             Long id,
             String content,
-            Long userId,
+            UserEntity user,
             PostEntity post,
             CommentEntity parent,
             LocalDateTime createdAt) {
         this.id = id;
         this.content = content;
-        this.userId = userId;
+        this.user = user;
         this.post = post;
         this.parent = parent;
         this.createdAt = LocalDateTime.now();
     }
     public Long getId() {return id;}
     public String getContent() {return content;}
-    public Long getUserId() {return userId;}
+    public UserEntity getUser() {return user;}
     public LocalDateTime getCreateTime() {return createdAt;}
     public PostEntity getPostEntity() {return post;}
     public CommentEntity getParent() {return parent;}
