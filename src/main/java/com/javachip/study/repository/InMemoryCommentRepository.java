@@ -17,7 +17,7 @@ public class InMemoryCommentRepository implements CommentRepository {
             CommentEntity saved = new CommentEntity(
                     newId,
                     comment.getContent(),
-                    comment.getUserId(),
+                    comment.getUser(),
                     comment.getPostEntity(),
                     comment.getParent(),
                     comment.getCreateTime()
