@@ -1,7 +1,5 @@
 package com.javachip.study.domain;
 
-import org.apache.catalina.User;
-
 import java.time.LocalDateTime;
 
 public class CommentEntity {
