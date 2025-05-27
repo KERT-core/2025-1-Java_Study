@@ -1,9 +1,9 @@
 package com.javachip.study.service;
 
-import com.javachip.study.domain.User;
+import com.javachip.study.domain.UserEntity;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.repository.UserRepository;
-import com.javachip.study.mapper.UserMapper;
+import com.javachip.study.mapper.SignupMapper;
 import com.javachip.study.exception.UserNotFoundException;
 
 import java.util.*;
@@ -13,9 +13,9 @@ import java.util.*;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository repo;
-    private final UserMapper mapper;
+    private final SignupMapper mapper;
     
-    public UserServiceImpl(UserRepository repo, UserMapper mapper) {
+    public UserServiceImpl(UserRepository repo, SignupMapper mapper) {
         this.repo = repo;
         this.mapper = mapper;
     }
@@ -26,14 +26,14 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("이미 존재하는 학번입니다");
         }
 
-        User user = mapper.toEntity(dto);
+        UserEntity user = mapper.toEntity(dto);
         repo.save(user);
         return user.getStudentId();
     }
 
     @Override
     public UserDto getUser(Long studentId) {
-        User user = repo.findByStudentId(studentId);
+        UserEntity user = repo.findByStudentId(studentId);
         if (user == null) {
             throw new UserNotFoundException(studentId);
         }

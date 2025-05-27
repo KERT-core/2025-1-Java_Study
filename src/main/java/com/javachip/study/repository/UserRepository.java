@@ -1,6 +1,6 @@
 package com.javachip.study.repository;
 
-import com.javachip.study.domain.User;
+import com.javachip.study.domain.UserEntity;
 import java.util.List;
 
 //User 테이블 repository를 위한 인터페이스
@@ -8,7 +8,7 @@ import java.util.List;
 //구현체를 갈아끼울때는 AppConfig를 이용
 
 public interface UserRepository {
-    void save(User user);
-    User findByStudentId(Long studentId);
-    List<User> findAll();
+    void save(UserEntity user);
+    UserEntity findByStudentId(Long studentId);
+    List<UserEntity> findAll();
 }
