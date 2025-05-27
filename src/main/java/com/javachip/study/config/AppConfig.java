@@ -1,5 +1,6 @@
 package com.javachip.study.config;
 
+import com.javachip.study.controller.CommentController;
 import com.javachip.study.controller.UserController;
 import com.javachip.study.controller.PostController;
 import com.javachip.study.mapper.*;
@@ -57,5 +58,30 @@ public class AppConfig {
     @Bean
     public PostController postController(PostService postService) {
         return new PostController(postService);
+    }
+
+    @Bean
+    public CommentMapper commentMapper() {
+        return new CommentMapperImpl();
+    }
+
+    @Bean
+    public CommentRepository commentRepository() {
+        return new InMemoryCommentRepository();
+    }
+
+    @Bean
+    public CommentService commentService() {
+        return new CommentServiceImpl(
+                commentRepository(),
+                userRepository(),
+                postRepository(),
+                commentMapper()
+        );
+    }
+
+    @Bean
+    public CommentController commentController() {
+        return new CommentController(commentService());
     }
 }
