@@ -8,12 +8,22 @@ import com.javachip.study.dto.UserDto;
 
 public class UserMapperImpl implements UserMapper {
     @Override
-    public UserEntity toEntity(UserDto dto, Long id) {
-        return new UserEntity(id, dto.username(), dto.age());
+    public UserEntity toEntity(UserDto dto) {
+        return new UserEntity(
+                dto.studentId(),
+                dto.username(),
+                dto.password(),
+                dto.email()
+        );
     }
 
     @Override
     public UserDto toDto(UserEntity entity) {
-        return new UserDto(entity.getId(), entity.getUsername(), entity.getAge());
+        return new UserDto(
+                entity.getStudentId(),
+                entity.getUsername(),
+                entity.getPassword(),
+                entity.getEmail()
+        );
     }
 }

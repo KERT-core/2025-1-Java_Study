@@ -1,6 +1,6 @@
 package com.javachip.study.dto;
 
-public record UserDto(
+public record SignupRequestDto(
         Long studentId,
         String username,
         String password,
