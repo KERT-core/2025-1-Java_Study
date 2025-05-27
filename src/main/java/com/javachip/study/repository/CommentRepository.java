@@ -9,7 +9,7 @@ public interface CommentRepository {
     CommentEntity save(CommentEntity commentEntity);
     List<CommentEntity> findAll();
     Optional<CommentEntity> findById(Long id);
-    List<CommentEntity> findByUserIdAndCommentId(Long userId, Long commentId);
     List<CommentEntity> findByPostId(Long postId);
+    List<CommentEntity> findByParentId(Long parentId);
     void deleteById(Long id);
 }
