@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface CommentService {
     CommentDto create(CommentDto commentDto);
-    List<CommentDto> findAll();
-    CommentDto findById(Long id);
-    CommentDto update(CommentDto commentDto);
+    List<CommentDto> getAll();
+    CommentDto getById(Long id);
+    //CommentDto update(Long id, CommentDto commentDto);
     void delete(Long id);
 }
