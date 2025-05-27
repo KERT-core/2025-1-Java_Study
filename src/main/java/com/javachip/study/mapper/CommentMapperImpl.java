@@ -17,7 +17,7 @@ public class CommentMapperImpl implements CommentMapper {
         return new CommentEntity(
                 null,
                 dto.content(),
-                user.getId(),
+                user.getStudentId(),
                 post,
                 parent,
                 LocalDateTime.now()

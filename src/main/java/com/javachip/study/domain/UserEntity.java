@@ -1,8 +1,5 @@
 package com.javachip.study.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 //유저 도메인 객체(DB)
 //데이터베이스와 매칭하기 위한 클래스
 //생성자 주입 사용
