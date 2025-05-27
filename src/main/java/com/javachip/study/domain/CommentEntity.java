@@ -15,7 +15,8 @@ public class CommentEntity {
             String content,
             Long userId,
             PostEntity post,
-            CommentEntity parent) {
+            CommentEntity parent,
+            LocalDateTime createdAt) {
         this.id = id;
         this.content = content;
         this.userId = userId;
