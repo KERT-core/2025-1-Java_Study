@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
         }
 
         UserEntity user = mapper.toEntity(dto);
-
         if (user.getStudentId() == null) {
             throw new IllegalArgumentException("학번은 필수입니다");
         } else if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
