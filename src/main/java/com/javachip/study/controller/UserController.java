@@ -21,7 +21,7 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ApiResponse<Long> create(@Valid @RequestBody UserDto dto) {
+    public ApiResponse<Long> create(@RequestBody UserDto dto) {
         try {
             return ApiResponse.success(service.signup(dto));
         } catch (IllegalArgumentException e) {
