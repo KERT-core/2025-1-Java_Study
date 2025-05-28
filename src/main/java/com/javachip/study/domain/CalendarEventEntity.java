@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 public class CalendarEventEntity {
     private Long id;
-    public String title;
-    public String description;
-    public LocalDateTime start;
-    public LocalDateTime end;
+    private String title;
+    private String description;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     public CalendarEventEntity(Long id, String title, String description, LocalDateTime start, LocalDateTime end) {
         this.id = id;
@@ -39,5 +39,21 @@ public class CalendarEventEntity {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
     }
 }

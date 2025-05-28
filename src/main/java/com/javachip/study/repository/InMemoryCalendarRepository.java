@@ -7,32 +7,35 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class InMemoryCalendarRepository {
+public class InMemoryCalendarRepository implements CalendarRepository {
 
     private final Map<Long, CalendarEventEntity> store = new HashMap<>();
     private final AtomicLong sequence = new AtomicLong();
 
-    public CalendarEventEntity save(CalendarEventEntity event) {
+    @Override
+    public void save(CalendarEventEntity event) {
         Long id = sequence.incrementAndGet();
         event.setId(id);
         store.put(id, event);
-        return event;
     }
 
+    @Override
     public Optional<CalendarEventEntity> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
+    @Override
     public List<CalendarEventEntity> findAll() {
         return new ArrayList<>(store.values());
     }
 
-    public CalendarEventEntity update(Long id, CalendarEventEntity event) {
+    @Override
+    public void update(Long id, CalendarEventEntity event) {
         event.setId(id);
         store.put(id, event);
-        return event;
     }
 
+    @Override
     public void delete(Long id) {
         store.remove(id);
     }
