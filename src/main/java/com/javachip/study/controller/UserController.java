@@ -3,7 +3,6 @@ package com.javachip.study.controller;
 import com.javachip.study.service.UserService;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.response.ApiResponse;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
