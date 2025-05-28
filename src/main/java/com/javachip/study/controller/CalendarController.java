@@ -2,7 +2,7 @@ package com.javachip.study.controller;
 
 import com.javachip.study.dto.CalendarEventDto;
 import com.javachip.study.response.ApiResponse;
-import com.javachip.study.service.CalendarService;
+import com.javachip.study.service.CalendarServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/calendar")
 public class CalendarController {
 
-    private final CalendarService service;
+    private final CalendarServiceImpl service;
 
-    public CalendarController(CalendarService service) {
+    public CalendarController(CalendarServiceImpl service) {
         this.service = service;
     }
 

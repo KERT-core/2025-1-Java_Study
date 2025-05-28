@@ -1,11 +1,7 @@
 package com.javachip.study.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class EventNotFoundException extends RuntimeException {
     public EventNotFoundException(Long id) {
-        super("Event with ID [" + id + "] not found.");
+        super("해당 ID(" + id + ")에 대한 이벤트를 찾을 수 없습니다.");
     }
 }
