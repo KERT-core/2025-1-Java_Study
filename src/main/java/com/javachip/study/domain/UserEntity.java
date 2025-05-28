@@ -1,8 +1,5 @@
 package com.javachip.study.domain;
 
-//유저 도메인 객체(DB)
-//데이터베이스와 매칭하기 위한 클래스
-//생성자 주입 사용
 public class UserEntity {
     private final Long studentId;
     private final String username;
@@ -29,3 +26,4 @@ public class UserEntity {
         return email;
     }
 }
+

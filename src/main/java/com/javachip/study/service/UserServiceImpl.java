@@ -27,6 +27,15 @@ public class UserServiceImpl implements UserService {
         }
 
         UserEntity user = mapper.toEntity(dto);
+        if (user.getStudentId() == null) {
+            throw new IllegalArgumentException("학번은 필수입니다");
+        } else if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+            throw new IllegalArgumentException("이름은 필수입니다");
+        } else if (user.getPassword().length() < 4) {
+            throw new IllegalArgumentException("비밀번호는 4자리 이상이여야 합니다");
+        } else if (!user.getEmail().contains("@")) {
+            throw new IllegalArgumentException("올바른 이메일 형식이여야 합니다");
+        }
         repo.save(user);
         return user.getStudentId();
     }
