@@ -3,6 +3,7 @@ package com.javachip.study.controller;
 import com.javachip.study.service.UserService;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.response.ApiResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -20,20 +21,32 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ApiResponse<Long> create(@RequestBody UserDto dto) {
-        return ApiResponse.success(service.signup(dto));
+    public ApiResponse<Long> create(@Valid @RequestBody UserDto dto) {
+        try {
+            return ApiResponse.success(service.signup(dto));
+        } catch (IllegalArgumentException e) {
+            return ApiResponse.fail(e.getMessage());
+        }
     }
 
     // 사용자 조회
     @GetMapping("/{studentId}")
     public ApiResponse<UserDto> get(@PathVariable Long studentId) {
-        return ApiResponse.success(service.getUser(studentId));
+        try {
+            return ApiResponse.success(service.getUser(studentId));
+        } catch (IllegalArgumentException e) {
+            return ApiResponse.fail(e.getMessage());
+        }
     }
 
     // 전체 사용자 조회
     @GetMapping
     public ApiResponse<List<UserDto>> list() {
-        return ApiResponse.success(service.getAllUsers());
+        try {
+            return ApiResponse.success(service.getAllUsers());
+        } catch (IllegalArgumentException e) {
+            return ApiResponse.fail(e.getMessage());
+        }
     }
 
 }
