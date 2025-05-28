@@ -6,7 +6,7 @@ import com.javachip.study.dto.UserDto;
 //UserMapper 인터페이스의 구현체
 //UserEntity <-> UserDto 변환 로직
 
-public class SignupMapperImpl implements SignupMapper {
+public class UserMapperImpl implements UserMapper {
     @Override
     public UserEntity toEntity(UserDto dto) {
         return new UserEntity(

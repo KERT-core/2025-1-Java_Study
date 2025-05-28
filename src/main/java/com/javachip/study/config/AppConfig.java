@@ -30,7 +30,7 @@ public class AppConfig {
     }
 
     @Bean
-    public SignupMapper userMapper() {
-        return new SignupMapperImpl();
+    public UserMapper userMapper() {
+        return new UserMapperImpl();
     }
 }

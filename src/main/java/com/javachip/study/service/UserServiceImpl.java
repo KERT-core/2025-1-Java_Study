@@ -3,7 +3,7 @@ package com.javachip.study.service;
 import com.javachip.study.domain.UserEntity;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.repository.UserRepository;
-import com.javachip.study.mapper.SignupMapper;
+import com.javachip.study.mapper.UserMapper;
 import com.javachip.study.exception.UserNotFoundException;
 
 import java.util.*;
@@ -13,9 +13,9 @@ import java.util.*;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository repo;
-    private final SignupMapper mapper;
+    private final UserMapper mapper;
     
-    public UserServiceImpl(UserRepository repo, SignupMapper mapper) {
+    public UserServiceImpl(UserRepository repo, UserMapper mapper) {
         this.repo = repo;
         this.mapper = mapper;
     }
