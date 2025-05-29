@@ -82,6 +82,6 @@ public class AppConfig {
 
     @Bean
     public CommentController commentController() {
-        return new CommentController(commentService());
+        return new CommentController(commentService(), postService(postRepository(), userRepository(), postMapper()));
     }
 }
