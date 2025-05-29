@@ -18,18 +18,22 @@ public class UserController {
         this.service = service;
     }
 
-    @PostMapping
+    // 회원가입
+    @PostMapping("/signup")
     public ApiResponse<Long> create(@RequestBody UserDto dto) {
-        return ApiResponse.success(service.register(dto));
+        return ApiResponse.success(service.signup(dto));
     }
 
-    @GetMapping("/{id}")
-    public ApiResponse<UserDto> get(@PathVariable Long id) {
-        return ApiResponse.success(service.getUser(id));
+    // 사용자 조회
+    @GetMapping("/{studentId}")
+    public ApiResponse<UserDto> get(@PathVariable Long studentId) {
+        return ApiResponse.success(service.getUser(studentId));
     }
 
+    // 전체 사용자 조회
     @GetMapping
     public ApiResponse<List<UserDto>> list() {
         return ApiResponse.success(service.getAllUsers());
     }
+
 }

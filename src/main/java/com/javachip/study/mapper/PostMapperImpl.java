@@ -33,7 +33,7 @@ public class PostMapperImpl implements PostMapper {
                 e.getTag(),
                 e.getDescription(),
                 e.getContent(),
-                e.getUser().getId(),
+                e.getUser().getStudentId(),
                 e.getCreatedAt(),
                 e.getUpdatedAt()
         );

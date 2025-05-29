@@ -21,18 +21,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long register(UserDto dto) {
-        Long newId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        UserEntity user = mapper.toEntity(dto, newId);
+    public Long signup(UserDto dto) {
+        if (repo.findByStudentId(dto.studentId()) != null) {
+            throw new IllegalArgumentException("이미 존재하는 학번입니다");
+        }
+
+        UserEntity user = mapper.toEntity(dto);
         repo.save(user);
-        return newId;
+        return user.getStudentId();
     }
 
     @Override
-    public UserDto getUser(Long id) {
-        return Optional.ofNullable(repo.findById(id))
-            .map(mapper::toDto)
-            .orElseThrow(() -> new UserNotFoundException(id));
+    public UserDto getUser(Long studentId) {
+        UserEntity user = repo.findByStudentId(studentId);
+        if (user == null) {
+            throw new UserNotFoundException(studentId);
+        }
+        return mapper.toDto(user);
     }
 
     @Override

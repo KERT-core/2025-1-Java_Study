@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface UserRepository {
     void save(UserEntity user);
-    UserEntity findById(Long id);
+    UserEntity findByStudentId(Long studentId);
     List<UserEntity> findAll();
 }
