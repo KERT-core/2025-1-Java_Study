@@ -28,7 +28,7 @@ public class CommentMapperImpl implements CommentMapper {
                 entity.getId(),
                 entity.getUser().getStudentId(),
                 entity.getPostEntity().getId(),
-                entity.getParent().getId(),
+                entity.getParent() != null ? entity.getParent().getId() : null,
                 entity.getContent(),
                 entity.getCreateTime()
         );
