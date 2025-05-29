@@ -86,6 +86,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public boolean existsById(Long id) {
+        return postRepo.existsById(id);
+    }
+
+    @Override
     public void delete(Long id) {
         // 존재 확인 후 삭제
         if (postRepo.findById(id).isEmpty()) {
