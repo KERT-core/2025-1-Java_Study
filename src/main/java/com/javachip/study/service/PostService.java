@@ -9,5 +9,6 @@ public interface PostService {
     List<PostDto> getAll(String search);
     PostDto getById(Long id);
     PostDto update(Long id, PostDto dto);
+    boolean existsById(Long id);
     void delete(Long id);
 }
