@@ -14,5 +14,6 @@ public interface PostRepository {
     Optional<PostEntity> findById(Long id);
     List<PostEntity> findAll();
     void deleteById(Long id);
+    boolean existsById(Long id);
     List<PostEntity> findByTitleContainingOrTagContaining(String title, String tag);
 }
