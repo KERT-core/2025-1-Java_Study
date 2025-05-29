@@ -2,9 +2,14 @@ package com.javachip.study.controller;
 
 import com.javachip.study.dto.PostDto;
 import com.javachip.study.service.PostService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/posts")
 public class PostController {
 
     private final PostService postService;
@@ -13,23 +18,33 @@ public class PostController {
         this.postService = postService;
     }
 
-    public PostDto createPost(PostDto dto) {
-        return postService.create(dto);
+    @PostMapping
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto dto) {
+        PostDto result = postService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    public List<PostDto> listPosts(String search) {
-        return postService.getAll(search);
+    @GetMapping
+    public ResponseEntity<List<PostDto>> listPosts(@RequestParam(required = false) String search) {
+        List<PostDto> result = postService.getAll(search);
+        return ResponseEntity.ok(result);
     }
 
-    public PostDto getPost(Long id) {
-        return postService.getById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPost(@PathVariable Long id) {
+        PostDto result = postService.getById(id);
+        return ResponseEntity.ok(result);
     }
 
-    public PostDto updatePost(Long id, PostDto dto) {
-        return postService.update(id, dto);
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDto> updatePost(@PathVariable Long id, @RequestBody PostDto dto) {
+        PostDto result = postService.update(id, dto);
+        return ResponseEntity.ok(result);
     }
 
-    public void deletePost(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
