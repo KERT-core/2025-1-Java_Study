@@ -1,5 +1,7 @@
 package com.javachip.study.service;
 
+import com.javachip.study.dto.LoginRequestDto;
+import com.javachip.study.dto.SignupRequestDto;
 import com.javachip.study.dto.UserDto;
 import java.util.List;
 
@@ -9,4 +11,5 @@ public interface UserService {
     Long signup(UserDto dto);
     UserDto getUser(Long studentId);
     List<UserDto> getAllUsers();
+    String login(LoginRequestDto dto);
 }

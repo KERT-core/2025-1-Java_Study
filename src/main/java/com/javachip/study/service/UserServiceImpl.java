@@ -1,10 +1,14 @@
 package com.javachip.study.service;
 
+import com.javachip.study.config.JwtUtil;
 import com.javachip.study.domain.UserEntity;
+import com.javachip.study.dto.LoginRequestDto;
 import com.javachip.study.dto.UserDto;
+import com.javachip.study.exception.InvalidCredentialException;
 import com.javachip.study.repository.UserRepository;
 import com.javachip.study.mapper.UserMapper;
 import com.javachip.study.exception.UserNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
 
@@ -14,10 +18,18 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private final UserRepository repo;
     private final UserMapper mapper;
-    
-    public UserServiceImpl(UserRepository repo, UserMapper mapper) {
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+
+
+    public UserServiceImpl(UserRepository repo,
+                           UserMapper mapper,
+                           PasswordEncoder passwordEncoder,
+                           JwtUtil jwtUtil) {
         this.repo = repo;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -25,10 +37,31 @@ public class UserServiceImpl implements UserService {
         if (repo.findByStudentId(dto.studentId()) != null) {
             throw new IllegalArgumentException("이미 존재하는 학번입니다");
         }
+      
+        String encodedPwd = passwordEncoder.encode(dto.password());
+        UserEntity user = new UserEntity(
+                dto.studentId(),
+                dto.username(),
+                encodedPwd,
+                dto.email()
+        );
 
-        UserEntity user = mapper.toEntity(dto);
         repo.save(user);
         return user.getStudentId();
+    }
+
+    @Override
+    public String login(LoginRequestDto dto) {
+        // studentId 로 조회
+        UserEntity user = repo.findByStudentId(dto.studentId());
+        if (user == null) {
+            throw new UserNotFoundException(dto.studentId());
+        }
+
+        if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
+            throw new InvalidCredentialException();
+        }
+        return jwtUtil.generateToken(user.getUsername());
     }
 
     @Override

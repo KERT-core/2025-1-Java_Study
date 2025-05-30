@@ -6,6 +6,8 @@ import com.javachip.study.controller.PostController;
 import com.javachip.study.mapper.*;
 import com.javachip.study.repository.*;
 import com.javachip.study.service.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,14 +19,24 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public UserController userController() {
-        return new UserController(userService());
+    public UserService userService(
+            UserRepository userRepository,
+            UserMapper userMapper,
+            PasswordEncoder passwordEncoder,
+            JwtUtil jwtUtil
+    ) {
+        return new UserServiceImpl(
+                userRepository,
+                userMapper,
+                passwordEncoder,
+                jwtUtil
+        );
+    }
+    @Bean
+    public UserController userController(UserService userService) {
+        return new UserController(userService);
     }
 
-    @Bean
-    public UserService userService() {
-        return new UserServiceImpl(userRepository(), userMapper());
-    }
 
     @Bean
     public UserRepository userRepository() {
@@ -82,6 +94,7 @@ public class AppConfig {
 
     @Bean
     public CommentController commentController() {
+
         return new CommentController(commentService(), postService(postRepository(), userRepository(), postMapper()));
     }
 }

@@ -1,7 +1,7 @@
 package com.javachip.study.repository;
 
 import com.javachip.study.domain.UserEntity;
-import java.util.List;
+import java.util.*;
 
 //User 테이블 repository를 위한 인터페이스
 //구현체는 지금 InMemory버전만 존재하지만, 필요에 따라서 DB버전의 구현체도 만들수있음(해야할 일임)
@@ -11,4 +11,5 @@ public interface UserRepository {
     void save(UserEntity user);
     UserEntity findByStudentId(Long studentId);
     List<UserEntity> findAll();
+    Optional<UserEntity> findByUsername(String username);
 }

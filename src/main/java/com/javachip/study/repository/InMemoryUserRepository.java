@@ -23,4 +23,11 @@ public class InMemoryUserRepository implements UserRepository {
     public List<UserEntity> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    @Override
+    public Optional<UserEntity> findByUsername(String username) {
+        return store.values().stream()
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst();
+    }
 }
