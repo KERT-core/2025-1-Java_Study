@@ -53,23 +53,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(LoginRequestDto dto) {
         // studentId 로 조회
-        UserEntity user = repo.findByStudentId(dto.studentId());
-        if (user == null) {
-            throw new UserNotFoundException(dto.studentId());
-        }
+        UserEntity user = repo.findByStudentId(dto.studentId())
+                .orElseThrow(()-> new UserNotFoundException(dto.studentId()));
 
         if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
             throw new InvalidCredentialException();
         }
-        return jwtUtil.generateToken(user.getUsername());
+        return jwtUtil.generateToken(String.valueOf(user.getStudentId()));
     }
 
     @Override
     public UserDto getUser(Long studentId) {
-        UserEntity user = repo.findByStudentId(studentId);
-        if (user == null) {
-            throw new UserNotFoundException(studentId);
-        }
+        UserEntity user = repo.findByStudentId(studentId)
+                .orElseThrow(() -> new UserNotFoundException(studentId));
         return mapper.toDto(user);
     }
 
