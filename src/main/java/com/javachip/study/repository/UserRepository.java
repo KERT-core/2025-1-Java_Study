@@ -9,7 +9,7 @@ import java.util.*;
 
 public interface UserRepository {
     void save(UserEntity user);
-    UserEntity findByStudentId(Long studentId);
+    Optional<UserEntity> findByStudentId(Long studentId);
     List<UserEntity> findAll();
     Optional<UserEntity> findByUsername(String username);
 }

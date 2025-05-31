@@ -15,8 +15,10 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public UserEntity findByStudentId(Long studentId) {
-        return store.get(studentId);
+    public Optional<UserEntity> findByStudentId(Long studentId) {
+        return store.values().stream()
+                .filter(u -> u.getStudentId().equals(studentId))
+                .findFirst();
     }
 
     @Override
