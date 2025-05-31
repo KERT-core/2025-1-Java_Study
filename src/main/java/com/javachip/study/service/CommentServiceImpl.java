@@ -13,7 +13,6 @@ import com.javachip.study.repository.PostRepository;
 import com.javachip.study.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepo;
