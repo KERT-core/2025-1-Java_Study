@@ -32,8 +32,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto create(PostDto dto) {
-        // 1) 사용자 조회 (Optional.ofNullable → orElseThrow)
-        UserEntity user = Optional.ofNullable(userRepo.findByStudentId(dto.userId()))
+        UserEntity user = userRepo.findByStudentId(dto.userId())
                 .orElseThrow(() -> new UserNotFoundException(dto.userId()));
 
         // 2) 엔티티 변환 & 저장

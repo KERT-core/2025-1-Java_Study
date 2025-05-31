@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
     }
     @Override
     public CommentDto create(CommentDto dto){
-        UserEntity user = Optional.ofNullable(userRepo.findByStudentId(dto.userId()))
+        UserEntity user = userRepo.findByStudentId(dto.userId())
                 .orElseThrow(() -> new UserNotFoundException(dto.userId()));
 
         PostEntity post = postRepo.findById(dto.postId())
