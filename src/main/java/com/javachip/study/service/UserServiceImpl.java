@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long signup(UserDto dto) {
-        if (repo.findByStudentId(dto.studentId()) != null) {
+        if (repo.findByStudentId(dto.studentId()).isPresent()) {
             throw new IllegalArgumentException("이미 존재하는 학번입니다");
         }
       
