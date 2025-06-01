@@ -10,7 +10,7 @@ import java.util.*;
 
 public class InMemoryLectureRepository implements LectureRepository {
 
-    private final Map<Long, LectureEntity> store = new HashMap<>();
+    private final Map<String, LectureEntity> store = new HashMap<>();
 
     @Override
     public void save(LectureEntity lectureEntity) {
@@ -18,7 +18,7 @@ public class InMemoryLectureRepository implements LectureRepository {
     }
 
     @Override
-    public Optional<LectureEntity> findById(Long id) {
+    public Optional<LectureEntity> findById(String id) {
         return Optional.ofNullable(store.get(id));  // 주어진 lectureId로 찾기
     }
 

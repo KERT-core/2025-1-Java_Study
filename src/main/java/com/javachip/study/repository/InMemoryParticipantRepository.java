@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class InMemoryParticipantRepository implements ParticipantRepository {
 
-    private final Map<Long, List<ParticipantEntity>> store = new HashMap<>();
+    private final Map<String, List<ParticipantEntity>> store = new HashMap<>();
 
     @Override
     public void save(ParticipantEntity participantEntity) {
@@ -19,12 +19,12 @@ public class InMemoryParticipantRepository implements ParticipantRepository {
     }
 
     @Override
-    public List<ParticipantEntity> findByLectureId(Long lectureId) {
+    public List<ParticipantEntity> findByLectureId(String lectureId) {
         return store.getOrDefault(lectureId, Collections.emptyList());
     }
 
     @Override
-    public List<ParticipantEntity> findByStudentId(Long studentId){
+    public List<ParticipantEntity> findByStudentId(String studentId){
         return store.values().stream()
                 .flatMap(List::stream)
                 .filter(p -> p.getStudentId().equals(studentId))

@@ -30,8 +30,9 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public void addLecture(LecturePostDto lecturePostDto){ // Lecture ID 생성해야 함.
         Long newId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        LectureEntity lectureEntity = lectureMapper.toEntity(lecturePostDto, newId);
+        LectureEntity lectureEntity = lectureMapper.toEntity(lecturePostDto, newId.toString());
         lectureRepo.save(lectureEntity);
+        System.out.println("lecture Id: " + newId);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public LectureIdGetDto getLecture(Long lectureId){
+    public LectureIdGetDto getLecture(String lectureId){
         LectureEntity lectureEntity = lectureRepo.findById(lectureId)
                 .orElseThrow(() -> new RuntimeException("Lecture not found"));
 
@@ -80,7 +81,7 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public void updateLecture(Long lectureId, LectureIdPostDto lectureIdPostDto){
+    public void updateLecture(String lectureId, LectureIdPostDto lectureIdPostDto){
         LectureEntity existingLecture = lectureRepo.findById(lectureId)
                 .orElseThrow(() -> new RuntimeException("Lecture not found"));
 
@@ -92,10 +93,11 @@ public class LectureServiceImpl implements LectureService {
         List<ParticipantEntity> existingParticipants = participantRepo.findByLectureId(lectureId);
         participantRepo.deleteAll(existingParticipants);
 
+        Long newId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         List<ParticipantDto> participantDtoList = lectureIdPostDto.participants();
         for (ParticipantDto participantDto : participantDtoList) {
             ParticipantEntity newParticipant = new ParticipantEntity(
-                    UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE,
+                    newId.toString(),
                     lectureId,
                     participantDto.studentId(),
                     participantDto.status(),

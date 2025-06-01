@@ -16,7 +16,7 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public List<ParticipantEntity> getParticipantHistory(Long studentId){
+    public List<ParticipantEntity> getParticipantHistory(String studentId){
         List<ParticipantEntity> history = participantRepo.findByStudentId(studentId);
         if (history == null || history.isEmpty()) {
             throw new UserNotFoundException(studentId);

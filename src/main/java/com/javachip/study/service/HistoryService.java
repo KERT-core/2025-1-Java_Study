@@ -8,5 +8,5 @@ import java.util.List;
 //User 관련 비즈니스 로직들을 구현하기 위한 인터페이스
 
 public interface HistoryService {
-    List<ParticipantEntity> getParticipantHistory(Long studentId);
+    List<ParticipantEntity> getParticipantHistory(String studentId);
 }

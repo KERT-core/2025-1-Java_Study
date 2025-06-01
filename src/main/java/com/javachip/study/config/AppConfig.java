@@ -7,12 +7,26 @@ import com.javachip.study.service.*;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //의존성 주입 (생성자 주입)
 //객체의 생명주기를 스프링이 관리할 수 있도록 등록(Bean으로 관리)
 
 @Configuration
 public class AppConfig {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**") // or "/api/**"
+                        .allowedOrigins("http://localhost:5173") // Vite 기본 포트
+                        .allowedMethods("*");
+            }
+        };
+    }
 
     //controller
     @Bean

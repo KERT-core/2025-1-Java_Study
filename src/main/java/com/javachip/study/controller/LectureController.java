@@ -29,12 +29,12 @@ public class LectureController {
     }
 
     @PostMapping("/{lectureId}")
-    public void updateLecture(@PathVariable Long lectureId, @RequestBody LectureIdPostDto lectureIdPostDto) {
+    public void updateLecture(@PathVariable String lectureId, @RequestBody LectureIdPostDto lectureIdPostDto) {
         service.updateLecture(lectureId, lectureIdPostDto);
     }
 
     @GetMapping("/{lectureId}")
-    public LectureIdGetDto getLecture(@PathVariable Long lectureId) {
+    public LectureIdGetDto getLecture(@PathVariable String lectureId) {
         return service.getLecture(lectureId);
     }
 }

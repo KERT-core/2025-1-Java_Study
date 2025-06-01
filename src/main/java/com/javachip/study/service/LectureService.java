@@ -8,6 +8,6 @@ import java.util.List;
 public interface LectureService {
     void addLecture(LecturePostDto lecturePostDto);
     List<LectureGetDto> getAllLectures();
-    LectureIdGetDto getLecture(Long lectureId);
-    void updateLecture(Long lectureId, LectureIdPostDto lectureIdPostDto);
+    LectureIdGetDto getLecture(String lectureId);
+    void updateLecture(String lectureId, LectureIdPostDto lectureIdPostDto);
 }

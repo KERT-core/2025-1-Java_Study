@@ -11,6 +11,6 @@ import java.util.Optional;
 
 public interface LectureRepository {
     void save(LectureEntity lectureEntity);
-    Optional<LectureEntity> findById(Long id);
+    Optional<LectureEntity> findById(String id);
     List<LectureEntity> findAll();
 }

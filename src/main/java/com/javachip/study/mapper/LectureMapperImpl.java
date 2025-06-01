@@ -9,7 +9,7 @@ import com.javachip.study.dto.LecturePostDto;
 
 public class LectureMapperImpl implements LectureMapper {
     @Override
-    public LectureEntity toEntity(LecturePostDto dto, Long lectureId){
+    public LectureEntity toEntity(LecturePostDto dto, String lectureId){
         return new LectureEntity(lectureId, dto.title(), dto.subtitle(), dto.date(), dto.location());
     }
 

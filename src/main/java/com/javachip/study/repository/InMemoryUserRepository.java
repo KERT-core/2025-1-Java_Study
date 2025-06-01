@@ -8,7 +8,7 @@ import java.util.*;
 
 public class InMemoryUserRepository implements UserRepository {
 
-    private final Map<Long, UserEntity> store = new HashMap<>();
+    private final Map<String, UserEntity> store = new HashMap<>();
 
     @Override
     public void saveAll(List<UserEntity> userEntities) {
@@ -18,12 +18,12 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public UserEntity findById(Long id) {
+    public UserEntity findById(String id) {
         return store.get(id);
     }
 
     @Override
-    public String findNameById(Long id) {
+    public String findNameById(String id) {
         UserEntity userEntity = store.get(id);
         if (userEntity == null) {
             throw new RuntimeException("User not found for id: " + id);  // User가 없으면 예외 발생

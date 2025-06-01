@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ParticipantRepository {
     void save(ParticipantEntity participantEntity);
-    List<ParticipantEntity> findByLectureId(Long lectureId);
-    List<ParticipantEntity> findByStudentId(Long studentId);
+    List<ParticipantEntity> findByLectureId(String lectureId);
+    List<ParticipantEntity> findByStudentId(String studentId);
     void deleteAll(List<ParticipantEntity> participantEntities);
 }

@@ -21,7 +21,7 @@ public class HistoryController {
     }
 
     @GetMapping("/{studentId}")
-    public List<ParticipantEntity> getParticipantHistory(@PathVariable long studentId) {
+    public List<ParticipantEntity> getParticipantHistory(@PathVariable String studentId) {
         return service.getParticipantHistory(studentId);
     }
 }
