@@ -2,7 +2,6 @@ package com.javachip.study.controller;
 
 import com.javachip.study.service.UserService;
 import com.javachip.study.dto.UserDto;
-import com.javachip.study.response.ApiResponse;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,17 +18,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ApiResponse<Long> create(@RequestBody UserDto dto) {
-        return ApiResponse.success(service.register(dto));
-    }
-
-    @GetMapping("/{id}")
-    public ApiResponse<UserDto> get(@PathVariable Long id) {
-        return ApiResponse.success(service.getUser(id));
+    public void addUsers(@RequestBody List<UserDto> userDtoList) {
+        service.addUsers(userDtoList);
     }
 
     @GetMapping
-    public ApiResponse<List<UserDto>> list() {
-        return ApiResponse.success(service.getAllUsers());
+    public List<UserDto> getUsers() {
+        return service.getAllUsers();
     }
 }

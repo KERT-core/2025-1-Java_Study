@@ -1,3 +1,4 @@
 package com.javachip.study.dto;
 
-public record UserDto(Long id, String username, int age) {}
+// user GET, POST
+public record UserDto(Long studentId, String name) {}

@@ -11,13 +11,24 @@ public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, UserEntity> store = new HashMap<>();
 
     @Override
-    public void save(UserEntity user) {
-        store.put(user.getId(), user);
+    public void saveAll(List<UserEntity> userEntities) {
+        for (UserEntity userEntity : userEntities) {
+            store.put(userEntity.getstudentId(), userEntity);
+        }
     }
 
     @Override
     public UserEntity findById(Long id) {
         return store.get(id);
+    }
+
+    @Override
+    public String findNameById(Long id) {
+        UserEntity userEntity = store.get(id);
+        if (userEntity == null) {
+            throw new RuntimeException("User not found for id: " + id);  // User가 없으면 예외 발생
+        }
+        return userEntity.getname();
     }
 
     @Override

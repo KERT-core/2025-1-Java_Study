@@ -4,39 +4,33 @@ import com.javachip.study.domain.UserEntity;
 import com.javachip.study.dto.UserDto;
 import com.javachip.study.repository.UserRepository;
 import com.javachip.study.mapper.UserMapper;
-import com.javachip.study.exception.UserNotFoundException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //UserService 인터페이스의 구현체
 //생성자 주입 사용
 
 public class UserServiceImpl implements UserService {
-    private final UserRepository repo;
-    private final UserMapper mapper;
+    private final UserRepository userRepo;
+    private final UserMapper userMapper;
     
-    public UserServiceImpl(UserRepository repo, UserMapper mapper) {
-        this.repo = repo;
-        this.mapper = mapper;
+    public UserServiceImpl(UserRepository userRepo, UserMapper userMapper) {
+        this.userRepo = userRepo;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public Long register(UserDto dto) {
-        Long newId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        UserEntity user = mapper.toEntity(dto, newId);
-        repo.save(user);
-        return newId;
-    }
+    public void addUsers(List<UserDto> userDtoList){
+        List<UserEntity> userEntities = userDtoList.stream()
+                .map(userMapper::toEntity)
+                .collect(Collectors.toList());
 
-    @Override
-    public UserDto getUser(Long id) {
-        return Optional.ofNullable(repo.findById(id))
-            .map(mapper::toDto)
-            .orElseThrow(() -> new UserNotFoundException(id));
+        userRepo.saveAll(userEntities);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
-        return repo.findAll().stream().map(mapper::toDto).toList();
+        return userRepo.findAll().stream().map(userMapper::toDto).toList();
     }
 }

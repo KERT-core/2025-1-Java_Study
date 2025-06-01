@@ -1,6 +1,6 @@
 package com.javachip.study.config;
 
-import com.javachip.study.controller.UserController;
+import com.javachip.study.controller.*;
 import com.javachip.study.mapper.*;
 import com.javachip.study.repository.*;
 import com.javachip.study.service.*;
@@ -14,10 +14,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
+    //controller
     @Bean
     public UserController userController() {
         return new UserController(userService());
     }
+
+    @Bean
+    public LectureController lectureController() { return new LectureController(lectureService()); }
+
+    @Bean
+    public HistoryController historyController() { return new HistoryController(historyService()); }
 
     @Bean
     public UserService userService() {
@@ -25,12 +32,25 @@ public class AppConfig {
     }
 
     @Bean
-    public UserRepository userRepository() {
-        return new InMemoryUserRepository();
-    }
+    public LectureService lectureService() { return new LectureServiceImpl(userRepository(), lectureRepository(), lectureMapper(), participantRepository()); }
+
+    @Bean
+    public HistoryService historyService() { return new HistoryServiceImpl(participantRepository()); }
+
+    @Bean
+    public UserRepository userRepository() { return new InMemoryUserRepository(); }
+
+    @Bean
+    public LectureRepository lectureRepository() { return new InMemoryLectureRepository(); }
+
+    @Bean
+    public ParticipantRepository participantRepository() { return new InMemoryParticipantRepository(); }
 
     @Bean
     public UserMapper userMapper() {
         return new UserMapperImpl();
     }
+
+    @Bean
+    public LectureMapper lectureMapper() { return new LectureMapperImpl(); }
 }

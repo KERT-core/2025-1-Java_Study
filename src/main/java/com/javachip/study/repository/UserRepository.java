@@ -8,7 +8,8 @@ import java.util.List;
 //구현체를 갈아끼울때는 AppConfig를 이용
 
 public interface UserRepository {
-    void save(UserEntity user);
+    void saveAll(List<UserEntity> userEntities);
     UserEntity findById(Long id);
+    String findNameById(Long id);
     List<UserEntity> findAll();
 }
