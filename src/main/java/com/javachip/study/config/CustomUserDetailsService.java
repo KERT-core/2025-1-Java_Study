@@ -3,10 +3,8 @@ package com.javachip.study.config;
 import com.javachip.study.domain.UserEntity;
 import com.javachip.study.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
