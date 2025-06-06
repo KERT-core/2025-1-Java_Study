@@ -11,6 +11,8 @@ import com.javachip.study.mapper.CommentMapper;
 import com.javachip.study.repository.CommentRepository;
 import com.javachip.study.repository.PostRepository;
 import com.javachip.study.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -32,15 +34,19 @@ public class CommentServiceImpl implements CommentService {
     }
     @Override
     public CommentDto create(CommentDto dto){
-        UserEntity user = userRepo.findByStudentId(dto.userId())
-                .orElseThrow(() -> new UserNotFoundException(dto.userId()));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long studentId = Long.valueOf(auth.getName());
+
+        UserEntity user = userRepo.findByStudentId(studentId)
+                .orElseThrow(() -> new UserNotFoundException(studentId));
 
         PostEntity post = postRepo.findById(dto.postId())
                 .orElseThrow(() -> new PostNotFoundException(dto.postId()));
+
         CommentEntity parent = dto.parentId() != null ?
                 commentRepo.findById(dto.parentId()).orElse(null) : null;
 
-        CommentEntity saved = commentRepo.save(mapper.toEntity(dto, post, parent, user));
+        CommentEntity saved = commentRepo.save(mapper.toEntity(dto,post,parent,user));
         return mapper.toDto(saved);
     }
 

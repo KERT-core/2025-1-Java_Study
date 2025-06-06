@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
             throw new InvalidCredentialException();
         }
-        return jwtUtil.generateToken(String.valueOf(user.getStudentId()));
+        return jwtUtil.generateToken(user.getStudentId());
     }
 
     @Override

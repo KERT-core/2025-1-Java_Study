@@ -1,5 +1,6 @@
 package com.javachip.study.service;
 
+import com.javachip.study.config.CustomUserDetails;
 import com.javachip.study.domain.PostEntity;
 import com.javachip.study.domain.UserEntity;
 import com.javachip.study.dto.PostDto;
@@ -8,6 +9,8 @@ import com.javachip.study.exception.UserNotFoundException;
 import com.javachip.study.mapper.PostMapper;
 import com.javachip.study.repository.PostRepository;
 import com.javachip.study.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,13 +34,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto create(PostDto dto) {
-        UserEntity user = userRepo.findByStudentId(dto.userId())
-                .orElseThrow(() -> new UserNotFoundException(dto.userId()));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        Long studentId = userDetails.getStudentId();
 
-        // 2) 엔티티 변환 & 저장
+        UserEntity user = userRepo.findByStudentId(studentId)
+                .orElseThrow(() -> new UserNotFoundException(studentId));
+
         PostEntity saved = postRepo.save(mapper.toEntity(dto, user));
-
-        // 3) DTO 변환 후 반환
         return mapper.toDto(saved);
     }
 

@@ -19,6 +19,7 @@ public class UserEntity {
     public Long getStudentId() {
         return studentId;
     }
+
     public String getUsername() {
         return username;
     }

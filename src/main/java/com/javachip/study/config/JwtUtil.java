@@ -27,11 +27,11 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String generateToken(String username) {
+    public String generateToken(Long studentId) {
         Date now = new Date();
         Date exp = new Date(now.getTime() + validityInMs);
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(studentId.toString())
                 .setIssuedAt(now)
                 .setExpiration(exp)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
@@ -39,13 +39,13 @@ public class JwtUtil {
     }
 
     // 토큰에서 username(sub) 추출
-    public String getUsername(String token) {
+    public Long getStudentId(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        return claims.getSubject();
+        return Long.parseLong(claims.getSubject());
     }
 
     // 토큰 유효성 검사

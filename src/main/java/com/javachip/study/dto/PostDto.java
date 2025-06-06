@@ -12,7 +12,6 @@ public record PostDto(
         String tag,
         String description,
         String content,
-        Long userId,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {}
